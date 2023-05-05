@@ -1,0 +1,4 @@
+name: Middle
+version: '${version}'
+main: plugin.middle.Middle
+api-version: 1.19
