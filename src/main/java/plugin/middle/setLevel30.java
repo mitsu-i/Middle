@@ -13,7 +13,7 @@ public class setLevel30 implements CommandExecutor {
       if(args.length == 1){
         player.setLevel(Integer.parseInt(args[0]));
       }else {
-        player.sendMessage("Nooooo!");
+        player.sendMessage("No!");
       }
 
     }
