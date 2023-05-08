@@ -1,4 +1,8 @@
-name: Middle
+name: middle
 version: '${version}'
-main: plugin.middle.Middle
+main: plugin.middle.middle
 api-version: 1.19
+commands:
+  setLevel30:
+  allSetLevel:
+  levelChange:

@@ -9,12 +9,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
+import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedEnterEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -27,12 +30,28 @@ public final class middle extends JavaPlugin implements Listener {
 
   @Override
   public void onEnable() {
+    saveDefaultConfig();
+    getConfig().getString("Message");
+
     // Plugin startup logic
     Bukkit.getPluginManager().registerEvents(this, this);
     getCommand("setLevel30").setExecutor(new setLevel30());
 
-    getCommand("LevelChange").setExecutor(new levelChangeCommand());
-    getCommand("AllSetLevel").setExecutor(new allSetLevelCommand());
+    getCommand("levelChange").setExecutor(new levelChangeCommand(this));
+    getCommand("allSetLevel").setExecutor(new allSetLevelCommand());
+  }
+
+  @EventHandler
+  public void onPlayerJoin(PlayerJoinEvent e) {
+    // イベント発生時のプレイヤーやワールドなどの情報を変数に持つ。
+    Player player = e.getPlayer();
+    World world = player.getWorld();
+    Location playerLocation = player.getLocation();
+
+    world.spawn(new Location(world, playerLocation.getX() + 4, playerLocation.getY(),
+            playerLocation.getZ()),
+        Chicken.class);
+
   }
 
 
